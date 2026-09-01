@@ -14,7 +14,7 @@ impl EnvironmentVars {
         let host = std::env::var("HOST").unwrap_or_else(|_| "0.0.0.0".to_string());
         let frontend_origin =
             std::env::var("FRONTEND_ORIGIN").unwrap_or("http://localhost:3000".to_string());
-        log::info!("Environment variables: {:?}", std::env::vars());
+
         Self {
             port,
             host,
