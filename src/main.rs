@@ -1,3 +1,5 @@
+#![allow(non_snake_case)]
+
 use crate::configuration::server::run;
 use crate::configuration::state::init_state;
 use env_logger::Env;
