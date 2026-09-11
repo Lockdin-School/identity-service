@@ -1,5 +1,6 @@
 use crate::core::accounts::repository::AccountRepositoryImpl::PostgresAccountRepository;
 use crate::core::accounts::service::AccountService::AccountService;
+use crate::core::sessions::service::SessionsService::SessionService;
 use crate::core::students::repository::StudentRepositoryImpl::PostgresStudentRepository;
 use crate::core::students::service::StudentService::StudentService;
 use crate::infrastructure::db::database::{init_postgres, run_migrations};
@@ -10,6 +11,7 @@ use std::sync::Arc;
 pub struct AppState {
     pub account_service: Data<AccountService>,
     pub student_service: Data<StudentService>,
+    pub session_service: Data<SessionService>,
 }
 
 pub fn app_state(pool: sqlx::PgPool) -> AppState {
@@ -20,6 +22,7 @@ pub fn app_state(pool: sqlx::PgPool) -> AppState {
         student_service: Data::new(StudentService::new(Arc::new(
             PostgresStudentRepository::new(pool.clone()),
         ))),
+        session_service: Data::new(SessionService {}),
     }
 }
 

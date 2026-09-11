@@ -1,6 +1,7 @@
 use crate::core::accounts::handlers::{
     create_account, get_account_by_cognito_sub, get_account_by_id,
 };
+use crate::core::sessions::handlers::get_session_token;
 use crate::core::students::handlers::{
     create_student_profile, get_student_profile_by_account_id, get_student_profile_by_id,
     update_student_profile,
@@ -25,6 +26,7 @@ pub fn configure(cfg: &mut web::ServiceConfig) {
                     .service(get_student_profile_by_id)
                     .service(get_student_profile_by_account_id)
                     .service(update_student_profile),
-            ),
+            )
+            .service(web::scope("/sessions").service(get_session_token)),
     );
 }
